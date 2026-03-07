@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Y-Tech Support — Dépannage Informatique à Domicile · Bouches-du-Rhône</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #0f4fff;
+      --blue-light: #3a6fff;
+      --dark: #0a0e1a;
+      --dark2: #111827;
+      --dark3: #1a2235;
+      --grey: #8a9bb5;
+      --white: #f0f4ff;
+      --accent: #00d4ff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 5%;
+      background: rgba(10,14,26,.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--accent); }
+
+    nav ul {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: var(--grey);
+      font-size: .9rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue);
+      color: var(--white) !important;
+      padding: .5rem 1.2rem;
+      border-radius: 50px;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--blue-light) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 8rem 5% 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(15,79,255,.25) 0%, transparent 70%);
+      top: -150px; right: -200px;
+      pointer-events: none;
+      animation: pulse 6s ease-in-out infinite;
+    }
+    .hero-glow2 {
+      position: absolute;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,212,255,.12) 0%, transparent 70%);
+      bottom: 0; left: 10%;
+      pointer-events: none;
+      animation: pulse 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: .7; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(15,79,255,.15);
+      border: 1px solid rgba(15,79,255,.35);
+      border-radius: 50px;
+      padding: .4rem 1rem;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1.8rem;
+      animation: fadeUp .6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 1.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.01em;
+      margin-bottom: 1.5rem;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--grey);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeUp .7s .3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: var(--blue);
+      color: var(--white);
+      padding: .85rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--blue-light); transform: translateY(-2px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      color: var(--white);
+      padding: .85rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,.07);
+      animation: fadeUp .7s .4s ease both;
+    }
+    .stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-size: .8rem;
+      color: var(--grey);
+      margin-top: .1rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 5%;
+      position: relative;
+    }
+
+    .section-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      color: var(--grey);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 540px;
+      font-weight: 300;
+    }
+
+    /* ── CREDIT IMPOT BANNER ── */
+    .credit-banner {
+      background: linear-gradient(135deg, rgba(15,79,255,.2), rgba(0,212,255,.1));
+      border: 1px solid rgba(0,212,255,.25);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin: 0 5% 3rem;
+    }
+    .credit-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+    .credit-text strong {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--accent);
+      display: block;
+      margin-bottom: .25rem;
+    }
+    .credit-text p {
+      font-size: .88rem;
+      color: var(--grey);
+      line-height: 1.5;
+    }
+
+    /* ── SERVICES GRID ── */
+    .services-header {
+      max-width: 1200px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: transform .25s, border-color .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--accent));
+      opacity: 0;
+      transition: opacity .25s;
+    }
+    .service-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(15,79,255,.3);
+      box-shadow: 0 20px 40px rgba(15,79,255,.15);
+    }
+    .service-card:hover::before { opacity: 1; }
+
+    .service-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(15,79,255,.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .service-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .service-desc {
+      font-size: .88rem;
+      color: var(--grey);
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    .service-price {
+      display: flex;
+      align-items: baseline;
+      gap: .4rem;
+    }
+    .price-amount {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .price-note {
+      font-size: .78rem;
+      color: var(--grey);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how-bg {
+      background: var(--dark2);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 3rem auto 0;
+    }
+
+    .step {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .step-num {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(15,79,255,.15);
+      border: 1px solid rgba(15,79,255,.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin: 0 auto 1.2rem;
+    }
+
+    .step h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: .5rem;
+    }
+
+    .step p {
+      font-size: .85rem;
+      color: var(--grey);
+      line-height: 1.6;
+    }
+
+    /* ── ZONE ── */
+    .zone-content {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .zone-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .chip {
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 50px;
+      padding: .5rem 1.1rem;
+      font-size: .88rem;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .chip::before {
+      content: '📍';
+      font-size: .8rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-bg {
+      background: var(--dark2);
+    }
+
+    .contact-wrapper {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-card {
+      background: var(--dark3);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 24px;
+      padding: 3rem;
+      margin-top: 3rem;
+    }
+
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 14px;
+      padding: 1.1rem 1.5rem;
+      text-decoration: none;
+      color: var(--white);
+      font-size: .95rem;
+      font-weight: 500;
+      transition: background .2s, border-color .2s;
+    }
+    .contact-btn:hover {
+      background: rgba(15,79,255,.15);
+      border-color: rgba(15,79,255,.4);
+    }
+    .contact-btn-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .contact-btn-icon.tel { background: rgba(15,79,255,.2); }
+    .contact-btn-icon.mail { background: rgba(0,212,255,.15); }
+    .contact-btn-text {
+      text-align: left;
+    }
+    .contact-btn-label {
+      font-size: .75rem;
+      color: var(--grey);
+    }
+    .contact-btn-value {
+      font-weight: 600;
+    }
+
+    .response-time {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      margin-top: 1.5rem;
+      font-size: .82rem;
+      color: var(--grey);
+    }
+    .response-time::before {
+      content: '⚡';
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 5%;
+      border-top: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+      gap: 1rem;
+    }
+
+    footer p {
+      font-size: .82rem;
+      color: var(--grey);
+    }
+
+    .footer-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .footer-logo span { color: var(--accent); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav ul { display: none; }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .credit-banner { flex-direction: column; text-align: center; margin: 0 0 2rem; }
+      footer { flex-direction: column; text-align: center; }
+      .contact-card { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Y-Tech <span>Support</span></a>
+  <ul>
+    <li><a href="#services">Prestations</a></li>
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#zone">Zone</a></li>
+    <li><a href="#contact" class="nav-cta">Me contacter</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Intervention à domicile — Bouches-du-Rhône</div>
+    <h1>Votre PC en panne ?<br><em>Je me déplace.</em><br>Je répare.</h1>
+    <p>Dépannage informatique rapide et transparent à domicile. Diagnostic, formatage, nettoyage, remplacement de composants — prix fixes, sans mauvaise surprise.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">📞 Prendre rendez-vous</a>
+      <a href="#services" class="btn-secondary">Voir les tarifs →</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">50<span>%</span></div>
+        <div class="stat-label">Crédit d'impôt possible</div>
+      </div>
+      <div>
+        <div class="stat-num">24<span>h</span></div>
+        <div class="stat-label">Délai d'intervention</div>
+      </div>
+      <div>
+        <div class="stat-num">0<span>€</span></div>
+        <div class="stat-label">Déplacement si intervention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRÉDIT D'IMPÔT BANNER -->
+<div class="credit-banner">
+  <div class="credit-icon">💡</div>
+  <div class="credit-text">
+    <strong>Crédit d'impôt de 50% sur vos interventions</strong>
+    <p>En tant que service à la personne agréé, vous bénéficiez d'un crédit d'impôt de 50% sur le montant de chaque intervention. Une intervention à 50€ ne vous coûte réellement que 25€.</p>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-header">
+    <div class="section-label">Prestations & Tarifs 2026</div>
+    <h2 class="section-title">Des prix clairs,<br>sans surprise</h2>
+    <p class="section-sub">Tarifs fixes affichés en toute transparence. Le déplacement est offert dès lors qu'une intervention est réalisée.</p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <div class="service-name">Diagnostic complet</div>
+      <div class="service-desc">Analyse complète de votre PC, identification du ou des problèmes, compte-rendu clair et conseils.</div>
+      <div class="service-price">
+        <span class="price-amount">29€</span>
+        <span class="price-note">offert si intervention réalisée</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🖥️</div>
+      <div class="service-name">Formatage & Réinstallation Windows</div>
+      <div class="service-desc">Remise à zéro complète, réinstallation propre de Windows 10/11, pilotes et logiciels essentiels.</div>
+      <div class="service-price">
+        <span class="price-amount">59€</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🧹</div>
+      <div class="service-name">Nettoyage PC</div>
+      <div class="service-desc">Nettoyage logiciel (virus, bloatware, registre) et nettoyage physique (ventilateurs, pâte thermique).</div>
+      <div class="service-price">
+        <span class="price-amount">39€</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🔩</div>
+      <div class="service-name">Remplacement de composant</div>
+      <div class="service-desc">RAM, SSD, disque dur, écran, batterie, clavier... Pose et vérification incluses.</div>
+      <div class="service-price">
+        <span class="price-amount">39€</span>
+        <span class="price-note">+ prix de la pièce</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">🦠</div>
+      <div class="service-name">Suppression virus & malware</div>
+      <div class="service-desc">Désinfection complète, suppression des logiciels espions, sécurisation et conseils de prévention.</div>
+      <div class="service-price">
+        <span class="price-amount">49€</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">💾</div>
+      <div class="service-name">Sauvegarde & récupération de données</div>
+      <div class="service-desc">Sauvegarde de vos fichiers importants ou récupération de données sur disque défaillant.</div>
+      <div class="service-price">
+        <span class="price-amount">49€</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📦</div>
+      <div class="service-name">Mise en service PC neuf</div>
+      <div class="service-desc">Configuration complète de votre nouveau PC, transfert de données, installation de vos logiciels.</div>
+      <div class="service-price">
+        <span class="price-amount">39€</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">📶</div>
+      <div class="service-name">Installation réseau & Wi-Fi</div>
+      <div class="service-desc">Configuration box, répéteurs Wi-Fi, partage réseau, connexion de vos appareils.</div>
+      <div class="service-price">
+        <span class="price-amount">45€</span>
+      </div>
+    </div>
+
+    <div class="service-card">
+      <div class="service-icon">⏱️</div>
+      <div class="service-name">Dépannage général</div>
+      <div class="service-desc">Intervention au taux horaire pour toute problématique non listée ci-dessus.</div>
+      <div class="service-price">
+        <span class="price-amount">50€</span>
+        <span class="price-note">/ heure</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMMENT ÇA MARCHE -->
+<section id="comment" class="how-bg">
+  <div style="max-width:1000px;margin:0 auto;text-align:center">
+    <div class="section-label">Processus</div>
+    <h2 class="section-title">Simple comme bonjour</h2>
+    <p class="section-sub" style="margin:0 auto">Du premier contact à la résolution, je m'occupe de tout.</p>
+  </div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Vous me contactez</h3>
+      <p>Par téléphone ou email, décrivez-moi votre problème. Je vous réponds sous 2h.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>On fixe un rendez-vous</h3>
+      <p>J'interviens à votre domicile dans les 24h, au créneau qui vous convient.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Je diagnostique</h3>
+      <p>Analyse complète de votre machine. Je vous explique clairement ce qui ne va pas avant toute intervention.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Je répare</h3>
+      <p>Intervention propre et efficace. Vous récupérez votre PC comme neuf, et je reste disponible si besoin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ZONE D'INTERVENTION -->
+<section id="zone">
+  <div class="zone-content">
+    <div class="section-label">Zone d'intervention</div>
+    <h2 class="section-title">Je me déplace chez vous</h2>
+    <p class="section-sub" style="margin:0 auto">Je couvre les Bouches-du-Rhône et les communes alentour. Contactez-moi pour vérifier si votre ville est dans ma zone.</p>
+    <div class="zone-chips">
+      <span class="chip">Châteaurenard</span>
+      <span class="chip">Saint-Martin-de-Crau</span>
+      <span class="chip">Arles</span>
+      <span class="chip">Salon-de-Provence</span>
+      <span class="chip">Istres</span>
+      <span class="chip">Miramas</span>
+      <span class="chip">Tarascon</span>
+      <span class="chip">Les Baux-de-Provence</span>
+      <span class="chip">Eyguières</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="contact-wrapper">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Parlons de votre problème</h2>
+    <p class="section-sub" style="margin:0 auto">Un doute, une panne, une question ? Je réponds rapidement et sans jargon.</p>
+    <div class="contact-card">
+      <p style="color:var(--grey);font-size:.9rem;margin-bottom:.5rem">Disponible du lundi au samedi · 9h–19h</p>
+      <div class="contact-options">
+        <a href="tel:+33767712804" class="contact-btn">
+          <div class="contact-btn-icon tel">📞</div>
+          <div class="contact-btn-text">
+            <div class="contact-btn-label">Appel direct</div>
+            <div class="contact-btn-value">07 67 71 28 04</div>
+          </div>
+        </a>
+        <a href="mailto:ytechsupport13@gmail.com" class="contact-btn">
+          <div class="contact-btn-icon mail">✉️</div>
+          <div class="contact-btn-text">
+            <div class="contact-btn-label">Email</div>
+            <div class="contact-btn-value">ytechsupport13@gmail.com</div>
+          </div>
+        </a>
+      </div>
+      <p class="response-time">Réponse garantie sous 2 heures en journée</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Y-Tech <span>Support</span></a>
+  <p>© 2026 Y-Tech Support · Dépannage informatique à domicile · Bouches-du-Rhône</p>
+  <p style="font-size:.78rem">Micro-entreprise · SIRET 934 635 277 00015 · Service à la personne</p>
+</footer>
+
+</body>
+</html>
