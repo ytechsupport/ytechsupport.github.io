@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0047)file:///C:/Users/Ya'sine/Downloads/index_3.html -->
+<!-- Y-Tech Support - index.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -96,7 +96,18 @@
       padding: 8rem 5% 5rem;
       position: relative;
       overflow: hidden;
+      background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&auto=format&fit=crop&q=80');
+      background-size: cover;
+      background-position: center;
     }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, rgba(10,14,26,0.93) 55%, rgba(10,14,26,0.65) 100%);
+      z-index: 0;
+    }
+    .hero-glow, .hero-glow2, .hero-content { position: relative; z-index: 1; }
 
     .hero-glow {
       position: absolute;
@@ -574,12 +585,13 @@
 
 <!-- NAV -->
 <nav>
-  <a href="file:///C:/Users/Ya&#39;sine/Downloads/index_3.html#" class="logo">Y-Tech <span>Support</span></a>
+  <a href="#" class="logo">Y-Tech <span>Support</span></a>
   <ul>
-    <li><a href="file:///C:/Users/Ya&#39;sine/Downloads/index_3.html#services">Prestations</a></li>
-    <li><a href="file:///C:/Users/Ya&#39;sine/Downloads/index_3.html#comment">Comment ça marche</a></li>
-    <li><a href="file:///C:/Users/Ya&#39;sine/Downloads/index_3.html#zone">Zone</a></li>
-    <li><a href="file:///C:/Users/Ya&#39;sine/Downloads/index_3.html#contact" class="nav-cta">Me contacter</a></li>
+    <li><a href="#services">Prestations</a></li>
+    <li><a href="#comment">Comment ça marche</a></li>
+    <li><a href="#zone">Zone</a></li>
+    <li><a href="#cgv">CGV</a></li>
+    <li><a href="#contact" class="nav-cta">Me contacter</a></li>
   </ul>
 </nav>
 
@@ -592,14 +604,10 @@
     <h1>Votre PC en panne ?<br><em>Je me déplace.</em><br>Je répare.</h1>
     <p>Dépannage informatique rapide et transparent à domicile. Diagnostic, formatage, nettoyage, remplacement de composants — prix fixes, sans mauvaise surprise.</p>
     <div class="hero-btns">
-      <a href="file:///C:/cdn-cgi/l/email-protection#9bf8f4f5effaf8efdbe2b6effef8f3e8eeebebf4e9efb5fde9" class="btn-primary">📩 Prendre rendez-vous</a>
-      <a href="file:///C:/Users/Ya&#39;sine/Downloads/index_3.html#services" class="btn-secondary">Voir les tarifs →</a>
+      <a href="https://calendly.com/y-motassim/30min" target="_blank" class="btn-primary">📅 Prendre rendez-vous</a>
+      <a href="#services" class="btn-secondary">Voir les tarifs →</a>
     </div>
     <div class="hero-stats">
-      <div>
-        <div class="stat-num">50<span>%</span></div>
-        <div class="stat-label">Crédit d'impôt possible</div>
-      </div>
       <div>
         <div class="stat-num">24<span>h</span></div>
         <div class="stat-label">Délai d'intervention</div>
@@ -611,15 +619,6 @@
     </div>
   </div>
 </section>
-
-<!-- CRÉDIT D'IMPÔT BANNER -->
-<div class="credit-banner">
-  <div class="credit-icon">💡</div>
-  <div class="credit-text">
-    <strong>Crédit d'impôt de 50% sur vos interventions</strong>
-    <p>En tant que service à la personne agréé, vous bénéficiez d'un crédit d'impôt de 50% sur le montant de chaque intervention. Une intervention à 50€ ne vous coûte réellement que 25€.</p>
-  </div>
-</div>
 
 <!-- SERVICES -->
 <section id="services">
@@ -661,7 +660,7 @@
     <div class="service-card">
       <div class="service-icon">🔩</div>
       <div class="service-name">Remplacement de composant</div>
-      <div class="service-desc">RAM, SSD, disque dur, écran, batterie, clavier... Pose et vérification incluses.</div>
+      <div class="service-desc">RAM, SSD, disque dur. Pose et vérification incluses. <em style="color:var(--grey);font-size:.82rem">Réparation dalle, carte mère et micro-soudure non pris en charge.</em></div>
       <div class="service-price">
         <span class="price-amount">39€</span>
         <span class="price-note">+ prix de la pièce</span>
@@ -679,8 +678,8 @@
 
     <div class="service-card">
       <div class="service-icon">💾</div>
-      <div class="service-name">Sauvegarde &amp; récupération de données</div>
-      <div class="service-desc">Sauvegarde de vos fichiers importants ou récupération de données sur disque défaillant.</div>
+      <div class="service-name">Sauvegarde & récupération de données</div>
+      <div class="service-desc">Sauvegarde de vos fichiers importants ou tentative de récupération sur disque en difficulté. <em style="color:var(--grey);font-size:.82rem">⚠️ Aucune garantie sur disque physiquement défaillant — intervention sans responsabilité sur les données.</em></div>
       <div class="service-price">
         <span class="price-amount">49€</span>
       </div>
@@ -753,7 +752,7 @@
   <div class="zone-content">
     <div class="section-label">Zone d'intervention</div>
     <h2 class="section-title">Je me déplace chez vous</h2>
-    <p class="section-sub" style="margin:0 auto">Je couvre les Bouches-du-Rhône et les communes alentour. Contactez-moi pour vérifier si votre ville est dans ma zone.</p>
+    <p class="section-sub" style="margin:0 auto">Je couvre les Bouches-du-Rhône (13), le Vaucluse (84) et le Gard limitrophe (30) dans un rayon d'environ 30 km. Contactez-moi pour vérifier si votre ville est dans ma zone.</p>
     <div class="zone-chips">
       <span class="chip">Châteaurenard</span>
       <span class="chip">Saint-Martin-de-Crau</span>
@@ -764,6 +763,17 @@
       <span class="chip">Tarascon</span>
       <span class="chip">Les Baux-de-Provence</span>
       <span class="chip">Eyguières</span>
+      <span class="chip">Avignon</span>
+      <span class="chip">Le Pontet</span>
+      <span class="chip">Vedène</span>
+      <span class="chip">Morières-lès-Avignon</span>
+      <span class="chip">Saint-Saturnin-lès-Avignon</span>
+      <span class="chip">Caumont-sur-Durance</span>
+      <span class="chip">Villeneuve-lès-Avignon</span>
+      <span class="chip">Les Angles</span>
+      <span class="chip">Aramon</span>
+      <span class="chip">Rochefort-du-Gard</span>
+      <span class="chip">Saze</span>
     </div>
   </div>
 </section>
@@ -777,14 +787,70 @@
     <div class="contact-card">
       <p style="color:var(--grey);font-size:.9rem;margin-bottom:.5rem">Réponse par email sous 2h · Lundi au samedi 9h–19h</p>
       <div class="contact-options">
-
-        <a href="file:///C:/cdn-cgi/l/email-protection#bbd8d4d5cfdad8cffbc296cfded8d3c8cecbcbd4c9cf95ddc9" class="contact-btn">
+        <a href="https://calendly.com/y-motassim/30min" target="_blank" class="contact-btn">
+          <div class="contact-btn-icon tel">📅</div>
+          <div class="contact-btn-text">
+            <div class="contact-btn-label">Réserver un créneau</div>
+            <div class="contact-btn-value">Prise de RDV en ligne</div>
+          </div>
+        </a>
+        <a href="mailto:contact@y-techsupport.fr" class="contact-btn">
           <div class="contact-btn-icon mail">✉️</div>
           <div class="contact-btn-text">
             <div class="contact-btn-label">Email</div>
-            <div class="contact-btn-value"><span class="__cf_email__" data-cfemail="0a6965647e6b697e4a73277e6f6962797f7a7a65787e246c78">[email&nbsp;protected]</span></div>
+            <div class="contact-btn-value">contact@y-techsupport.fr</div>
           </div>
         </a>
       </div>
-      <p class="response-time">Réponse garantie sous 2 heures en journée</p>
-    </div></div></section></body></html>
+<!-- CGV -->
+<section id="cgv" style="background:var(--dark2)">
+  <div style="max-width:860px;margin:0 auto">
+    <div class="section-label">Mentions légales & CGV</div>
+    <h2 class="section-title">Conditions Générales de Vente</h2>
+
+    <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:2rem">
+
+      <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.8rem">1. Prestataire</h3>
+        <p style="font-size:.9rem;color:var(--grey);line-height:1.7">MOTASSIM Ya'sine — Y-Tech Support, entreprise individuelle immatriculée au RCS de Tarascon sous le numéro 934 635 277. Siège social : 7 Avenue Léo Lagrange, 13160 Châteaurenard. Contact : contact@y-techsupport.fr</p>
+      </div>
+
+      <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.8rem">2. Prestations & tarifs</h3>
+        <p style="font-size:.9rem;color:var(--grey);line-height:1.7">Les tarifs affichés sont en euros TTC. TVA non applicable — Article 293 B du CGI. Toute intervention fait l'objet d'un devis oral préalable. Le déplacement est offert dès lors qu'une intervention est réalisée. Dans le cas contraire, un forfait diagnostic de 29€ est facturé.</p>
+      </div>
+
+      <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.8rem">3. Périmètre d'intervention</h3>
+        <p style="font-size:.9rem;color:var(--grey);line-height:1.7">Y-Tech Support intervient exclusivement sur les composants et logiciels expressément mentionnés dans les prestations proposées. Ne sont pas pris en charge : la réparation de dalles d'écran, de cartes mères défectueuses, toute opération de micro-soudure, ni la réparation de téléphones portables au niveau matériel interne.</p>
+      </div>
+
+      <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem;border-left:3px solid #f59e0b">
+        <h3 style="font-size:1rem;font-weight:700;color:#f59e0b;margin-bottom:.8rem">4. Limitation de responsabilité — Données & matériel</h3>
+        <p style="font-size:.9rem;color:var(--grey);line-height:1.7">Le client est seul responsable de la sauvegarde de ses données avant toute intervention. Y-Tech Support ne pourra être tenu responsable de la perte de données survenant au cours ou à la suite d'une intervention, notamment en cas de disque dur en fin de vie ou présentant des secteurs défectueux.<br><br>
+        En cas de tentative de récupération de données sur support défaillant, le client est informé et accepte que l'intervention est réalisée sans garantie de résultat. Le risque d'aggravation de l'état du support est inhérent à toute opération sur un disque défaillant et ne saurait engager la responsabilité du prestataire.<br><br>
+        La responsabilité du prestataire est limitée au montant de la facture de l'intervention concernée.</p>
+      </div>
+
+      <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.8rem">5. Paiement</h3>
+        <p style="font-size:.9rem;color:var(--grey);line-height:1.7">Le règlement est exigible à l'issue de l'intervention, par virement bancaire, espèces ou chèque à l'ordre de MOTASSIM Ya'sine. Une facture est systématiquement remise au client.</p>
+      </div>
+
+      <div style="background:var(--dark3);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:2rem">
+        <h3 style="font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:.8rem">6. Droit applicable</h3>
+        <p style="font-size:.9rem;color:var(--grey);line-height:1.7">Les présentes CGV sont soumises au droit français. En cas de litige, une solution amiable sera recherchée en priorité. À défaut, les tribunaux compétents du ressort de Tarascon seront saisis.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="footer-logo">Y-Tech <span>Support</span></a>
+  <p>© 2026 Y-Tech Support — SIRET 934 635 277 R.C.S. Tarascon</p>
+  <a href="#cgv" style="font-size:.82rem;color:var(--grey);text-decoration:none">CGV & Mentions légales</a>
+</footer>
+
+</body></html>
